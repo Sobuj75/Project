@@ -1,0 +1,92 @@
+#include <iostream>
+#include <string>
+#include <bits/stdc++.h>
+using namespace std;
+
+// Define a base class 'Person'
+class Person {
+public:
+    string name;
+
+    // Constructor for the 'Person' class
+    Person(string& n) {
+        name = n;
+    }
+
+    // Virtual function for introducing a person
+    virtual void introduce() {
+        cout << "Hello, my name is " << name << endl;
+    }
+
+    // Pure virtual function for displaying details of a person (abstract method)
+    virtual void displayDetails() = 0;
+};
+
+// Define a derived class 'Student' that inherits from 'Person'
+class Student : public Person {
+private:
+    int studentID;
+
+public:
+    // Constructor for the 'Student' class
+    Student(string& n, int id) : Person(n), studentID(id) {
+    }
+
+    // Override the 'introduce' method from the base class
+    void introduce() {
+        cout << "Hi, I'm " << name << " and I'm a student." << endl;
+    }
+
+    // Implement the pure virtual 'displayDetails' method from the base class
+    void displayDetails() {
+        cout << "Student Details:" << endl;
+        cout << "Name: " << name << endl;
+        cout << "Student ID: " << studentID << endl;
+    }
+};
+
+// Function to modify an integer by value
+void modifyValue(int x) {
+    x = 10;
+}
+
+// Function to modify an integer by reference
+void modifyReference(int& x) {
+    x = 20;
+}
+
+int main() {
+    // Create instances of 'Person' and 'Student' classes
+    Person person("babul");
+    Student student("sobuj", 100489);
+
+    // Create a pointer to 'Person'
+    Person* personPtr;
+
+    // Point the pointer to 'person' and call the 'introduce' method
+    personPtr = &person;
+    personPtr->introduce();
+
+    // Point the pointer to 'student' and call the 'introduce' method
+    personPtr = &student;
+    personPtr->introduce();
+
+    // Call the 'displayDetails' method for the 'student' object
+    student.displayDetails();
+
+    // Create two integer variables
+    int value = 5;
+    int reference = 5;
+
+    // Call the 'modifyValue' function with 'value'
+    modifyValue(value);
+
+    // Call the 'modifyReference' function with 'reference'
+    modifyReference(reference);
+
+    // Print the modified values
+    cout << "Value after call by value: " << value << endl;
+    cout << "Value after call by reference: " << reference << endl;
+
+    return 0;
+}
